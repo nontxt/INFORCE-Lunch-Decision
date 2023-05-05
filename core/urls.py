@@ -25,4 +25,6 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('lunch/', include('lunch.urls')),
+    path('account/', include('account.urls')),
 ]
