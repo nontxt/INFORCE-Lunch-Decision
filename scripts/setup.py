@@ -1,4 +1,4 @@
-from . import accounts_load, menu_load, restaurant_load, votes_load
+from . import accounts_load, menu_load, restaurant_load, votes_load, create_admin
 
 
 def run():
@@ -6,3 +6,4 @@ def run():
     restaurant_load.run()
     menu_load.run()
     votes_load.run()
+    create_admin.run()

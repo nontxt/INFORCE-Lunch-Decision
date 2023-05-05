@@ -1,6 +1,6 @@
 from random import choices
 
-from lunch.models import Restaurant, DailyMenu
+from lunch.models import Restaurant, Menu
 
 deserts = [
     'Apple pie',
@@ -46,7 +46,7 @@ main = [
 
 
 def run():
-    DailyMenu.objects.all().delete()
+    Menu.objects.all().delete()
 
     for restaurant in Restaurant.objects.all():
         menu = []
@@ -56,4 +56,4 @@ def run():
                 if len(items) == 2:
                     menu.extend(items)
                     break
-        DailyMenu.objects.create(restaurant=restaurant, items='\n'.join(menu))
+        Menu.objects.create(restaurant=restaurant, items='\n'.join(menu))

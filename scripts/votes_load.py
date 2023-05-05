@@ -1,15 +1,16 @@
 from random import choice
 
-from lunch.models import DailyMenu
-from account.models import Employee
+from django.contrib.auth.models import User
+
+from lunch.models import Menu
 
 
 def run():
-    menus = DailyMenu.objects.all()
+    menus = Menu.objects.all()
 
     for menu in menus:
         menu.customers_vote.clear()
 
-    for customer in Employee.objects.all():
+    for customer in User.objects.filter(groups__name='Employee'):
         menu = choice(menus)
         menu.customers_vote.add(customer)

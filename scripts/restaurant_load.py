@@ -1,7 +1,7 @@
+from django.contrib.auth.models import User
 from faker import Faker
 
 from lunch.models import Restaurant
-from account.models import Owner
 
 
 def run():
@@ -19,6 +19,5 @@ def run():
     ]
     fake = Faker()
     Restaurant.objects.all().delete()
-
-    for owner in Owner.objects.all():
+    for owner in User.objects.filter(groups__name='Owner'):
         Restaurant.objects.create(name=names.pop(), address=fake.address(), owner=owner)
