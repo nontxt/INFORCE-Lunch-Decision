@@ -7,16 +7,17 @@ from rest_framework.response import Response
 from rest_framework.exceptions import NotFound
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.versioning import AcceptHeaderVersioning
 from .models import Restaurant, Menu
 from .serializers import RestaurantSerializer, MenuSerializer, MostVoteMenuSerializer
 from .permissions import IsOwner, IsEmployee
 
 
 class RestaurantViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsOwner]
+    permission_classes = [IsAuthenticated, IsOwner]
     queryset = Restaurant.objects.all()
     serializer_class = RestaurantSerializer
+    versioning_class = AcceptHeaderVersioning
 
     def get_queryset(self):
         if self.action in ['update', 'destroy', 'set_menu']:
@@ -36,11 +37,14 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], url_path='menu', url_name='get-menu', detail=True)
     def get_menu(self, request, pk=None):
+        print(request.version)
+        print(request.headers)
+        # print(request.headers['version'])
         restaurant = self.get_object()
         menu_qs = Menu.objects.filter(date__gte=timezone.now().date(), restaurant=restaurant).first()
         serializer = MenuSerializer(menu_qs)
         if serializer.data['restaurant'] is None:
-            raise NotFound('The restaurant has not a day menu yet.')
+            raise NotFound('The restaurant has not a dayle menu yet.')
         return Response(serializer.data)
 
     @action(methods=['post'], url_path='set-menu', url_name='set-menu', detail=True)
@@ -56,7 +60,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 
 
 class MenuViewSet(ListModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
-    permission_classes = [IsEmployee]
+    permission_classes = [IsAuthenticated, IsEmployee]
     queryset = Menu.objects.filter(date__gte=timezone.now().date())
     serializer_class = MenuSerializer
 
