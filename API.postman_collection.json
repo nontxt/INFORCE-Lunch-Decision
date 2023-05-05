@@ -1,0 +1,555 @@
+{
+	"info": {
+		"_postman_id": "33511744-7fd1-4d1c-a164-224c88be816f",
+		"name": "API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25347125"
+	},
+	"item": [
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Group",
+					"item": [
+						{
+							"name": "Assign to employee",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwODA5LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImM0N2Q3M2FiNmIxNzRhNTU4ZjI2MDVmODJlNmQxM2NiIiwidXNlcl9pZCI6MjAyfQ.Vl1oT1p6CucMoUrayZhXy9cWm6mtdVBulEBjGL7NA4c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/account/employees/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"account",
+										"employees",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Assign to owners",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwODA5LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImM0N2Q3M2FiNmIxNzRhNTU4ZjI2MDVmODJlNmQxM2NiIiwidXNlcl9pZCI6MjAyfQ.Vl1oT1p6CucMoUrayZhXy9cWm6mtdVBulEBjGL7NA4c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/account/owners/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"account",
+										"owners",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Leave from owners",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwODA5LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImM0N2Q3M2FiNmIxNzRhNTU4ZjI2MDVmODJlNmQxM2NiIiwidXNlcl9pZCI6MjAyfQ.Vl1oT1p6CucMoUrayZhXy9cWm6mtdVBulEBjGL7NA4c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/account/owners/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"account",
+										"owners",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Leave from employee",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwODA5LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImM0N2Q3M2FiNmIxNzRhNTU4ZjI2MDVmODJlNmQxM2NiIiwidXNlcl9pZCI6MjAyfQ.Vl1oT1p6CucMoUrayZhXy9cWm6mtdVBulEBjGL7NA4c",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/account/employees/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"account",
+										"employees",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Create user",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "mariosldls",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "MarioPass123",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "mario@mail.com",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base}}/auth/users/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"users",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtain JWT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "username",
+											"value": "admin",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "admin",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base}}/auth/token/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Refresh JWT",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "refresh",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY4MzM4NjAxOCwiaWF0IjoxNjgzMjk5NjE4LCJqdGkiOiI1Nzc5M2RjZTFlNzY0Y2RmODMzMWRhN2IxODExNjM2NiIsInVzZXJfaWQiOjIwMn0.ND-HyN1W9s1PCHA_v-fCpeN86ndgzy02wiAnHxsdAZU",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base}}/auth/token/refresh/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"auth",
+										"token",
+										"refresh",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Lunch",
+			"item": [
+				{
+					"name": "Restaurant",
+					"item": [
+						{
+							"name": "Restaurant list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwMjc1LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImNkOGYzNTNkNmRjYjQ1MzJhNmRhMjQ0ZmJhMTE3Njg5IiwidXNlcl9pZCI6MjAyfQ.b6I4KXqchGzWHzwTSgme4d3oUUy8Psywegjln6pQwBs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/restaurants/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"restaurants",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restaurant get menu",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwMjc1LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImNkOGYzNTNkNmRjYjQ1MzJhNmRhMjQ0ZmJhMTE3Njg5IiwidXNlcl9pZCI6MjAyfQ.b6I4KXqchGzWHzwTSgme4d3oUUy8Psywegjln6pQwBs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/restaurants/22/menu",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"restaurants",
+										"22",
+										"menu"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restaurant set menu",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwMjc1LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImNkOGYzNTNkNmRjYjQ1MzJhNmRhMjQ0ZmJhMTE3Njg5IiwidXNlcl9pZCI6MjAyfQ.b6I4KXqchGzWHzwTSgme4d3oUUy8Psywegjln6pQwBs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "items",
+											"value": "\"Item1, Item2, Item3\"",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base}}/lunch/restaurants/23/set-menu/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"restaurants",
+										"23",
+										"set-menu",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Restaurant create",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMjk5OTE4LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6Ijg1YzU5MDc2Nzg5NjRlZGRhYWMzYzk2NzQ0ZDE2ZWY0IiwidXNlcl9pZCI6MjAyfQ.cUkSuI630RKcrNFVwOFDhGqKfEmFtAn1DZ4glkUYFsg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "address",
+											"value": "TestAdress",
+											"type": "text"
+										},
+										{
+											"key": "name",
+											"value": "TestName",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base}}/lunch/restaurants/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"restaurants",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Menu",
+					"item": [
+						{
+							"name": "Menu list",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwMjc1LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImNkOGYzNTNkNmRjYjQ1MzJhNmRhMjQ0ZmJhMTE3Njg5IiwidXNlcl9pZCI6MjAyfQ.b6I4KXqchGzWHzwTSgme4d3oUUy8Psywegjln6pQwBs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/menus/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"menus",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve menu",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwMjc1LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImNkOGYzNTNkNmRjYjQ1MzJhNmRhMjQ0ZmJhMTE3Njg5IiwidXNlcl9pZCI6MjAyfQ.b6I4KXqchGzWHzwTSgme4d3oUUy8Psywegjln6pQwBs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/menus/1/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"menus",
+										"1",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Vote",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwNTk3LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6IjMyYTViYzk2YjRiYjQ3ZjM4MWRkNGY4YWJmNjI5MmQ1IiwidXNlcl9pZCI6MjAyfQ.QSEgqw9_nXE4NedKNZSS_Yr_sorGIcFTh6-A3uHxhWw",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/menus/1/vote/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"menus",
+										"1",
+										"vote",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Unvote",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMzAwMjc1LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6ImNkOGYzNTNkNmRjYjQ1MzJhNmRhMjQ0ZmJhMTE3Njg5IiwidXNlcl9pZCI6MjAyfQ.b6I4KXqchGzWHzwTSgme4d3oUUy8Psywegjln6pQwBs",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/menus/1/vote/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"menus",
+										"1",
+										"vote",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get the best place",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjgzMjk5OTE4LCJpYXQiOjE2ODMyOTk2MTgsImp0aSI6Ijg1YzU5MDc2Nzg5NjRlZGRhYWMzYzk2NzQ0ZDE2ZWY0IiwidXNlcl9pZCI6MjAyfQ.cUkSuI630RKcrNFVwOFDhGqKfEmFtAn1DZ4glkUYFsg",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{base}}/lunch/menus/best/",
+									"host": [
+										"{{base}}"
+									],
+									"path": [
+										"lunch",
+										"menus",
+										"best",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}

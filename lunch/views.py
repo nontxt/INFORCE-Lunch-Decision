@@ -33,8 +33,9 @@ class RestaurantViewSet(viewsets.ModelViewSet):
         """
         data = request.data.copy()
         data['owner'] = self.request.user.id    # Assign the user as owner
+        print(data)
         serializer = self.get_serializer(data=data)
-        serializer.is_valid(raise_exception=False)
+        serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
@@ -45,10 +46,10 @@ class RestaurantViewSet(viewsets.ModelViewSet):
         Return restaurants dayle menu
         """
         restaurant = self.get_object()
-        menu_qs = Menu.objects.filter(date__gte=timezone.now().date(), restaurant=restaurant).first()
-        serializer = MenuSerializer(menu_qs)
-        if serializer.data['restaurant'] is None:
+        menu_qs = Menu.objects.filter(date__gte=timezone.now().date(), restaurant=restaurant)
+        if not menu_qs.exists():
             raise NotFound('The restaurant has not a dayle menu yet.')
+        serializer = MenuSerializer(menu_qs.first())
         return Response(serializer.data)
 
     @action(methods=['post'], url_path='set-menu', url_name='set-menu', detail=True)
