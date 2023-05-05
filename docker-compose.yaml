@@ -1,31 +1,26 @@
-version: '3'
+version: '3.9'
 
 services:
   db:
     image: postgres
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: lunch_place
-    networks:
-      - backend
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
-    restart: always
-    hostname: db
   web:
     build: .
-    environment:
-      - DATABASE_URL=postgres://postgres:postgres@db/lunch_place
-    command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runscript setup &&
+             python manage.py runserver 0.0.0.0:8000"
     ports:
       - "8000:8000"
     depends_on:
       - db
-    networks:
-      - backend
-
-networks:
-  backend:

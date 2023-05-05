@@ -1,6 +1,12 @@
 # INFORCE-Lunch-Decision
-**Note**: For now, docker can't work correctly, for use, you need to set up PostgreSQL or set sqlite3 db on settings.py
-## Steps to run the application:
+
+## Steps to run the application from the docker:
+1. Clone this repository
+2. Go ahead in the project directory
+3. Run `docker-compose up`
+
+
+## Steps to run the application from the command line:
 1. Clone this repository
 2. Go ahead in the project directory
    * If you have pipenv, in your command line:
