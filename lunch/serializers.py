@@ -6,15 +6,28 @@ from .models import Restaurant, Menu
 
 
 class RestaurantSerializer(serializers.ModelSerializer):
+    owner_name = serializers.SerializerMethodField(read_only=True)  # User friendly name
+
     class Meta:
         model = Restaurant
-        fields = '__all__'
+        fields = ['id', 'name', 'address', 'owner_name', 'owner']
+        extra_kwargs = {
+            'owner': {'write_only': True}
+        }
+
+    def get_owner_name(self, obj):
+        return f"{obj.owner.first_name} {obj.owner.last_name}"
 
 
 class MenuSerializer(serializers.ModelSerializer):
+    restaurant_name = serializers.StringRelatedField(source='restaurant', read_only=True)   # User friendly name
+
     class Meta:
         model = Menu
-        fields = ['restaurant', 'items']
+        fields = ['id', 'restaurant', 'items', 'restaurant_name']
+        extra_kwargs = {
+            'restaurant': {'write_only': True}
+        }
 
     def validate(self, data):
         """

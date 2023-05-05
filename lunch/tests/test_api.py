@@ -56,7 +56,7 @@ class RestaurantAPIViewTestCase(BaseAPITestCase):
         url = reverse('restaurants-list')
         response = self.owner_client.post(url, data={'name': 'TestRestaurant', 'address': 'TestAddress'})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.json()['owner'], self.owner.id)
+        self.assertEqual(response.json()['data']['owner'], self.owner.id)
 
     def test_prohibit_creation_restaurant_by_employee(self):
         """
@@ -128,7 +128,7 @@ class RestaurantAPIViewTestCase(BaseAPITestCase):
 
         response = self.owner_client.post(url, data={'items': "Item4, Item5, Item6"})
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-        self.assertEqual(response.json()['message'], ["You can only set one menu per day"])
+        self.assertEqual(response.json()['data']['message'], ["You can only set one menu per day"])
         self.assertEqual(len(Menu.objects.all()), 1)
 
     def test_get_menu(self):
@@ -174,7 +174,7 @@ class MenuAPIViewTestCase(BaseAPITestCase):
         url = reverse('menus-detail', kwargs={'pk': self.menu1.id})
         response = self.employee_client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json()['restaurant'], self.restaurant1.id)
+        self.assertEqual(response.json()['data']['restaurant'], self.restaurant1.id)
 
     def test_vote(self):
         """
@@ -227,11 +227,11 @@ class MenuAPIViewTestCase(BaseAPITestCase):
         self.menu1.customers_vote.add(self.employee.id)
         response = self.employee_client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json()['restaurant'], self.menu1.restaurant.id)
-        self.assertEqual(response.json()['votes'], 1)
+        self.assertEqual(response.json()['data']['restaurant'], self.menu1.restaurant.id)
+        self.assertEqual(response.json()['data']['votes'], 1)
 
         self.menu2.customers_vote.set([self.employee.id, employee])
         response = self.employee_client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.json()['restaurant'], self.menu2.restaurant.id)
-        self.assertEqual(response.json()['votes'], 2)
+        self.assertEqual(response.json()['data']['restaurant'], self.menu2.restaurant.id)
+        self.assertEqual(response.json()['data']['votes'], 2)

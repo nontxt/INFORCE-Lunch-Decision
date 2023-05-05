@@ -34,7 +34,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
         data = request.data.copy()
         data['owner'] = self.request.user.id    # Assign the user as owner
         serializer = self.get_serializer(data=data)
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid(raise_exception=False)
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
