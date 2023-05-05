@@ -5,6 +5,9 @@ from lunch.models import Restaurant
 
 
 def run():
+    """
+    Pre-populate restaurants
+    """
     names = [
         'The Rusty Spoon',
         'La Petite Boulangerie',

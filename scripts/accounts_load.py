@@ -4,6 +4,9 @@ from faker import Faker
 
 
 def run():
+    """
+    Pre-populate users and assign them to groups
+    """
     fake = Faker()
 
     User.objects.all().delete()

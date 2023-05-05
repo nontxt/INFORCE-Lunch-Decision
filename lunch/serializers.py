@@ -17,6 +17,9 @@ class MenuSerializer(serializers.ModelSerializer):
         fields = ['restaurant', 'items']
 
     def validate(self, data):
+        """
+        Validate that owner creates one menu per day
+        """
         if Menu.objects.filter(restaurant=data['restaurant'], date=timezone.now().date()).exists():
             raise serializers.ValidationError(detail={'message': "You can only set one menu per day"})
         return data

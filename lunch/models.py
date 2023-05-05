@@ -21,7 +21,7 @@ class Menu(models.Model):
     customers_vote = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='votes')
 
     class Meta:
-        unique_together = ["restaurant", "date"]
+        unique_together = ["restaurant", "date"]  # Owner can add only one menu per day
 
     def __str__(self):
         return f"{self.restaurant.name}'s menu"

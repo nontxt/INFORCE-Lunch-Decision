@@ -46,6 +46,9 @@ main = [
 
 
 def run():
+    """
+    Pre-populate menus for restaurants
+    """
     Menu.objects.all().delete()
 
     for restaurant in Restaurant.objects.all():

@@ -2,6 +2,9 @@ from . import accounts_load, menu_load, restaurant_load, votes_load, create_admi
 
 
 def run():
+    """
+    Pre-population script
+    """
     print('Pre-populating')
     group_load.run()
     accounts_load.run()

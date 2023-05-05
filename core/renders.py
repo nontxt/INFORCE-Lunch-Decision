@@ -2,6 +2,9 @@ from rest_framework.renderers import JSONRenderer
 
 
 class VersionedJSONRenderer(JSONRenderer):
+    """
+    JSON renderer with versioning support
+    """
     def render(self, data, accepted_media_type=None, renderer_context=None):
         request = renderer_context['request']
         version = request.version

@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -8,6 +9,9 @@ from rest_framework import status
 @api_view(['post', 'delete'])
 @login_required
 def employee(request):
+    """
+    The current user assigns/leaves the employee group
+    """
     employee_group, _ = Group.objects.get_or_create(name='Employee')
     if request.method == 'POST':
         employee_group.user_set.add(request.user)
@@ -21,6 +25,9 @@ def employee(request):
 @api_view(['post', 'delete'])
 @login_required
 def owner(request):
+    """
+    The current user assigns/leaves the owner group
+    """
     owner_group, _ = Group.objects.get_or_create(name='Owner')
     if request.method == 'POST':
         owner_group.user_set.add(request.user)

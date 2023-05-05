@@ -6,6 +6,9 @@ from lunch.models import Menu
 
 
 def run():
+    """
+    Pre-populate votes
+    """
     menus = Menu.objects.all()
 
     for menu in menus:
