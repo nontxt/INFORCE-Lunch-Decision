@@ -1,25 +1,23 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
-
+from django.contrib.auth.models import User, Group
 from faker import Faker
 
-from lunch.models import Restaurant, DailyMenu
-from account.models import Employee, Owner
+from lunch.models import Restaurant, Menu
 
-user_model = get_user_model()
 fake = Faker()
 
 
 class Setup(TestCase):
 
     def setUp(self):
-        owner = user_model.objects.create_user(username=fake.simple_profile()['username'],
-                                               email=fake.email(),
-                                               password=fake.password(),
-                                               first_name=fake.first_name(),
-                                               last_name=fake.last_name()
-                                               )
-        self.owner = Owner.objects.create(user=owner)
+        owner_group, _ = Group.objects.get_or_create(name='Owner')
+        self.owner = User.objects.create_user(username=fake.simple_profile()['username'],
+                                              email=fake.email(),
+                                              password=fake.password(),
+                                              first_name=fake.first_name(),
+                                              last_name=fake.last_name()
+                                              )
+        owner_group.user_set.add(self.owner)
 
 
 class RestaurantModelTestCase(Setup):
@@ -56,28 +54,28 @@ class RestaurantModelTestCase(Setup):
             Restaurant.objects.get(id=1)
 
 
-class DailyMenuModelTestCase(Setup):
+class MenuModelTestCase(Setup):
 
     def setUp(self):
         super().setUp()
         self.restaurant1 = Restaurant.objects.create(name="LittleLemon", address='8 Union st.', owner=self.owner)
         self.restaurant2 = Restaurant.objects.create(name="Dominos", address='100 Heroes st.', owner=self.owner)
 
-        customer = user_model.objects.create_user(username=fake.simple_profile()['username'],
+        employee_group, _ = Group.objects.get_or_create(name='Employee')
+        self.customer1 = User.objects.create_user(username=fake.simple_profile()['username'],
                                                   email=fake.email(),
                                                   password=fake.password(),
                                                   first_name=fake.first_name(),
                                                   last_name=fake.last_name()
                                                   )
-        self.customer1 = Employee.objects.create(user=customer)
 
-        customer = user_model.objects.create_user(username=fake.simple_profile()['username'],
+        self.customer2 = User.objects.create_user(username=fake.simple_profile()['username'],
                                                   email=fake.email(),
                                                   password=fake.password(),
                                                   first_name=fake.first_name(),
                                                   last_name=fake.last_name()
                                                   )
-        self.customer2 = Employee.objects.create(user=customer)
+        employee_group.user_set.set([self.customer1, self.customer2])
 
         self.items = """
         1. Pizza
@@ -86,14 +84,14 @@ class DailyMenuModelTestCase(Setup):
         4. Cake
         """
 
-        self.menu = DailyMenu.objects.create(restaurant=self.restaurant1, items=self.items)
+        self.menu = Menu.objects.create(restaurant=self.restaurant1, items=self.items)
 
     def test_create(self):
         """
         Test creating a menu
         """
 
-        menu = DailyMenu.objects.create(restaurant=self.restaurant2, items=self.items)
+        menu = Menu.objects.create(restaurant=self.restaurant2, items=self.items)
 
         self.assertEqual(menu.id, 2)
         self.assertEqual(menu.restaurant, self.restaurant2)
@@ -105,8 +103,8 @@ class DailyMenuModelTestCase(Setup):
 
         self.assertEqual(self.menu.id, 1)
         self.menu.delete()
-        with self.assertRaises(DailyMenu.DoesNotExist):
-            DailyMenu.objects.get(id=1)
+        with self.assertRaises(Menu.DoesNotExist):
+            Menu.objects.get(id=1)
 
     def test_votes(self):
         """

@@ -1,63 +1,65 @@
 from django.test import TestCase
-from django.contrib.auth import get_user_model
+from django.contrib.auth.models import User, Group
 
 from faker import Faker
 
-from account.models import Employee, Owner
-
-user_model = get_user_model()
 fake = Faker()
 
 
 class Setup(TestCase):
 
     def setUp(self):
-        self.user = user_model.objects.create_user(username=fake.simple_profile()['username'],
-                                                   email=fake.email(),
-                                                   password=fake.password(),
-                                                   first_name=fake.first_name(),
-                                                   last_name=fake.last_name()
-                                                   )
+        self.user = User.objects.create_user(username=fake.simple_profile()['username'],
+                                             email=fake.email(),
+                                             password=fake.password(),
+                                             first_name=fake.first_name(),
+                                             last_name=fake.last_name()
+                                             )
 
 
 class OwnerModelTestCase(Setup):
 
-    def test_create(self):
-        """
-        Test creating an owner
-        """
-        owner = Owner.objects.create(user=self.user)
-        self.assertEqual(owner.id, 1)
+    def setUp(self):
+        super().setUp()
+        self.owner_group, _ = Group.objects.get_or_create(name='Owner')
 
-    def test_delete(self):
+    def test_assign(self):
         """
-        Test deleting an owner
+        Test assigning to owner group
         """
-        owner = Owner.objects.create(user=self.user)
-        self.assertEqual(owner.id, 1)
-        owner.delete()
-        with self.assertRaises(Owner.DoesNotExist):
-            Owner.objects.get(id=1)
+        self.owner_group.user_set.add(self.user)
+        self.assertIn(self.owner_group, self.user.groups.all())
+
+    def test_remove(self):
+        """
+        Test removing from owner group
+        """
+        self.owner_group.user_set.add(self.user)
+        self.assertIn(self.owner_group, self.user.groups.all())
+        self.owner_group.user_set.remove(self.user)
+        self.assertNotIn(self.owner_group, self.user.groups.all())
 
 
 class EmployeeModelTestCase(Setup):
 
-    def test_create(self):
-        """
-        Test creating an employee
-        """
+    def setUp(self):
+        super().setUp()
+        self.employee_group, _ = Group.objects.get_or_create(name='Employee')
 
-        employee = Employee.objects.create(user=self.user)
-
-        self.assertEqual(employee.id, 1)
-
-    def test_delete(self):
+    def test_assign(self):
         """
-        Test deleting an employee
+        Test assigning to employee group
         """
 
-        employee = Employee.objects.create(user=self.user)
-        self.assertEqual(employee.id, 1)
-        employee.delete()
-        with self.assertRaises(Employee.DoesNotExist):
-            Employee.objects.get(id=1)
+        self.employee_group.user_set.add(self.user)
+        self.assertIn(self.employee_group, self.user.groups.all())
+
+    def test_remove(self):
+        """
+        Test removing from employee group
+        """
+
+        self.employee_group.user_set.add(self.user)
+        self.assertIn(self.employee_group, self.user.groups.all())
+        self.employee_group.user_set.remove(self.user)
+        self.assertNotIn(self.employee_group, self.user.groups.all())
