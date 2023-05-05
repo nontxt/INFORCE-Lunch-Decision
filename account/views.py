@@ -35,3 +35,6 @@ def owner(request):
     else:
         owner_group.user_set.remove(request.user)
         return Response({'message': 'ok'}, status=status.HTTP_204_NO_CONTENT)
+
+
+# TODO: Add endpoint /me/ to retrieve assigned groups

@@ -4,6 +4,9 @@ from rest_framework import serializers
 
 from .models import Restaurant, Menu
 
+# TODO: Add Hyperlinks for related models
+# TODO: Add Hyperlinks for vote/unvote
+
 
 class RestaurantSerializer(serializers.ModelSerializer):
     owner_name = serializers.SerializerMethodField(read_only=True)  # User friendly name
