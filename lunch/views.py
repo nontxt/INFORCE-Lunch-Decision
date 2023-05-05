@@ -37,9 +37,6 @@ class RestaurantViewSet(viewsets.ModelViewSet):
 
     @action(methods=['get'], url_path='menu', url_name='get-menu', detail=True)
     def get_menu(self, request, pk=None):
-        print(request.version)
-        print(request.headers)
-        # print(request.headers['version'])
         restaurant = self.get_object()
         menu_qs = Menu.objects.filter(date__gte=timezone.now().date(), restaurant=restaurant).first()
         serializer = MenuSerializer(menu_qs)

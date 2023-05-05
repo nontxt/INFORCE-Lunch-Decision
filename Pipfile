@@ -8,6 +8,9 @@ django = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 faker = "*"
+psycopg2-binary = "*"
+django-extensions = "*"
+djoser = "*"
 
 [dev-packages]
 
