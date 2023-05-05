@@ -1,10 +1,11 @@
 from django.db import models
+from django.conf import settings
 
 
 class Restaurant(models.Model):
     name = models.CharField(max_length=200)
     address = models.CharField(max_length=255)
-    owner = models.ForeignKey('account.Owner', on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     class Meta:
         ordering = ('name',)
@@ -13,11 +14,14 @@ class Restaurant(models.Model):
         return self.name
 
 
-class DailyMenu(models.Model):
-    restaurant = models.OneToOneField(Restaurant, on_delete=models.CASCADE, related_name='menu')
+class Menu(models.Model):
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='menu')
     items = models.TextField()
-    customers_vote = models.ManyToManyField('account.Employee', related_name='votes')
+    date = models.DateField(auto_now_add=True)
+    customers_vote = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='votes')
+
+    class Meta:
+        unique_together = ["restaurant", "date"]
 
     def __str__(self):
         return f"{self.restaurant.name}'s menu"
-
