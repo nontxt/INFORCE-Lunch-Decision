@@ -31,6 +31,8 @@
 | `auth/token/refresh/` | POST   | _refresh_              | Obtain new jwt access token          |
 | `admin/`              | GET    |                        | Admin site                           |
 
+**Note**: By default admin has **admin** as _username_ and _password_.
+
 ### API Account:
 
 | Endpoint                           | Method | Parameters                                   | Description                             |
