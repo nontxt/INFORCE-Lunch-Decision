@@ -18,7 +18,7 @@
 3. Run `python manage.py makemigrations`
 4. Run `python manage.py migrate`
 5. Run `python manage.py test` for run unittests
-6. Run `python manage.py runscript seput` to populate databases
+6. Run `python manage.py runscript setup` to populate databases
 7. Run `python manage.py runserver`
 
 
